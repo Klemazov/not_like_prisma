@@ -2,10 +2,10 @@
 import logging
 
 # side библиотеки
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
 
 #локальные модули
-from handlers import (greet_user, talk_to_me, processing_user_photo)
+from handlers import (greet_user, talk_to_me, image_start, get_user_image, send_filtered_photo)
 
 import settings
 
@@ -26,7 +26,9 @@ def main():
     mybot = Updater(settings.API_KEY, use_context=True, request_kwargs=PROXY)
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
-    dp.add_handler(MessageHandler(Filters.photo, processing_user_photo))
+    dp.add_handler(MessageHandler(Filters.regex('^(Начать обработку фото)$'), image_start))
+    dp.add_handler(MessageHandler(Filters.photo, get_user_image))
+    dp.add_handler(MessageHandler(Filters.text, send_filtered_photo))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
     logging.info("Бот стартовал")
     mybot.start_polling()
