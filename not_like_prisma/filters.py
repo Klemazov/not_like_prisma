@@ -1,13 +1,7 @@
 import cv2
 import numpy as np
 
-def gray_filter(image):
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    return gray_image
-
-
-
-class Filters():
+class ImageFilters():
     def __init__(self, image):
         self.image = image
     

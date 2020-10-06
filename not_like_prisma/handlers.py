@@ -2,7 +2,7 @@ import os
 
 from telegram import ReplyKeyboardMarkup
 import cv2
-from filters import gray_filter, Filters
+from filters import gray_filter, ImageFilters
 from keyboard import main_keyboard, greeting_text, chose_filter_keyboard
 from utils import make_folders
 
